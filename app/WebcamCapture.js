@@ -4,7 +4,9 @@
 import React, {useRef} from "react";
 import Webcam from "react-webcam";
 import { Box, Button, Modal, Stack, TextField, Typography } from "@mui/material";
+// Really focus on these two lines and understand how these are used in projects. 
 import { useState,useEffect } from "react";
+import axios from "axios";
 
 const WebcamCapture = () => {
     const webcamRef = useRef(null);
@@ -17,7 +19,20 @@ const WebcamCapture = () => {
 
     const retake = () => {
         setImage(null);
-    }
+    };
+
+    const processImage = async () => {
+      if (image) {
+        try {
+          console.log("Sending image for processing...");
+          const response = await axios.post('/api/process-image', { image })
+          const {data} = response.data;
+          console.log("Processed data: ", data)
+        } catch (error) {
+          console.error("Error processing image: ", error);
+        }
+      }
+    };
   
     return (
         <Box width="100%" display="flex" flexDirection="column" alignItems="center">
@@ -42,7 +57,7 @@ const WebcamCapture = () => {
             {image !== null && (
               <Button variant="contained" color="primary" onClick={retake}>Retake</Button>
             )}
-            <Button variant="contained" color="primary">Process</Button>
+            <Button variant="contained" color="primary" onClick = {processImage}>Process</Button>
           </Stack>
         </Box>
       );

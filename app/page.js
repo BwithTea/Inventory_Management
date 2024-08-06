@@ -14,6 +14,7 @@ import WebcamCapture from "./WebcamCapture";
 
 export default function Home() {
   // Goal is to comment out each line to understand what each line does
+  // Another goal is to be able to add new containers/databases 
   const [inventory, setInventory] = useState([])
   const [open, setopen] = useState(false)
   const [open2, setopen2] = useState(false)
@@ -178,7 +179,7 @@ export default function Home() {
           
           <Stack direction = "row" spacing = {1}>
 
-            <Button variant = "contained" onClick={() => handleOpen()}>Add Item </Button>
+            <Button variant = "contained" onClick={() => handleOpen()}>+ Create</Button>
             <Button variant = "contained" onClick={() => handleOpen2()}>Scan Items</Button>
 
           </Stack>
